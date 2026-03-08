@@ -1,0 +1,249 @@
+id: ef6d2253-de8a-4add-8786-e6c50a920910
+name: NCAA Tournament Seed Prediction Pipeline
+project_id: e219d3bd-8aa9-4f87-98dd-7423011b9f18
+global_imports: []
+python_global_imports: ''
+r_global_imports: ''
+requirements: []
+linux_packages: []
+environment_variables: []
+is_public: false
+organization_id: 374d6d9c-4317-4dd3-b6bd-72b86406d07f
+layers:
+- blocks:
+  - auto_size: false
+    canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    compute_settings: null
+    description: Visualizes top 20 features by mutual information score with color-coded
+      categories showing predictive strength for NCAA tournament seeding
+    height: 1000
+    id: 08ea2d2a-f80e-4c76-8a2d-b971bec142eb
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    name: mi_importance_chart
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 4000
+    y: 2800
+  - auto_size: false
+    canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    compute_settings: null
+    description: Advanced ensemble seed regressor using LOYO CV with GBR, ExtraTrees,
+      and RandomForest on 66 features (base + engineered) to predict NCAA overall
+      seed rankings (1-68) for tournament teams with grid-optimized model weights
+    height: 1000
+    id: 2891665a-852b-438c-8cc6-b6db69e587c5
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    name: loyo_advanced_regressor
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 8000
+    y: 4200
+  - auto_size: false
+    canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    compute_settings: null
+    description: "Audits NCAA tournament seed submission for critical errors\u2014\
+      validates seed ranges, tournament team counts, data leakage, and diagnoses systematic\
+      \ prediction failures"
+    height: 1000
+    id: 2cc81d95-9aa1-4b0a-b7d8-d51ecbcede78
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    name: submission_audit
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 12000
+    y: 2800
+  - auto_size: false
+    canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    compute_settings: null
+    description: 'Analyzes feature-to-seed relationships: engineers wins/losses from
+      records, calculates Pearson correlations with target, visualizes top 15 features
+      in heatmap and bar chart'
+    height: 1000
+    id: 2e155989-b47e-432c-b3fa-b41ba9a33151
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    name: correlation_heatmap
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 2000
+    y: 1400
+  - auto_size: false
+    canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    compute_settings: null
+    description: Visualizes NCAA tournament seed distribution with bar chart by seed
+      tier and box plot with summary statistics
+    height: 1000
+    id: 49327f63-85f2-42f4-8cbe-7ae9c6db4a5a
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    name: target_distribution_chart
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 2000
+    y: 0
+  - auto_size: false
+    canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    compute_settings: null
+    description: Loads NCAA tournament datasets and performs comprehensive exploratory
+      analysis including missing values, target variable distribution, data types,
+      feature inventory, and summary statistics
+    height: 1000
+    id: 4fc5ffa8-917f-4052-ab08-9929c22e751e
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    name: load_and_eda
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: 0
+  - auto_size: false
+    canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    compute_settings: null
+    description: "Builds final tournament seed submission by selecting the best regressor\
+      \ model (basic GBR+Ridge vs adv3), applying predictions to 70 tournament teams\
+      \ from classifier output, assigning seed 0 to non-tournament rows, validating\
+      \ seed ranges 1\u201368, and exporting CSV with distribution analysis charts."
+    height: 1000
+    id: 7718f9d0-edd1-435a-8228-02d32ad18638
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    name: build_submission
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 10000
+    y: 4200
+  - auto_size: false
+    canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    compute_settings: null
+    description: 'Predicts NCAA tournament seeds (1-16) for tournament teams via two-stage
+      ensemble: GradientBoosting + Ridge regressor with leave-one-year-out CV, producing
+      seed predictions and residual analysis charts'
+    height: 1000
+    id: 86397ee3-5833-4a17-8e13-61e201d990c5
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    name: seed_regressor
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 8000
+    y: 2800
+  - auto_size: false
+    canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    compute_settings: null
+    description: Transforms raw tournament data into 47 predictive features (win rates,
+      quad scores, NET rank tiers, conference strength) via parsing, ratios, and interaction
+      terms, then imputes nulls and ranks features by mutual information with seed
+      target.
+    height: 1000
+    id: 903293de-61d5-4c6e-8068-30d2ec4d3206
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    name: feature_engineering
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 2000
+    y: 2800
+  - auto_size: false
+    canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    compute_settings: null
+    description: Trains GradientBoosting classifier with Leave-One-Year-Out CV to
+      predict NCAA tournament participation; achieves 0.96 AUC with feature importance
+      & validation visualizations
+    height: 1000
+    id: a766942b-9f71-4f9f-8968-9235bb27d680
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    name: tournament_classifier
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 6000
+    y: 2800
+  canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+  edges:
+  - canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    id: 0f73c61f-f97f-4b38-a2a7-0e409cb2264e
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    source: 86397ee3-5833-4a17-8e13-61e201d990c5
+    target: 7718f9d0-edd1-435a-8228-02d32ad18638
+  - canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    id: 12e9f687-418b-4f96-b2e0-b2bc4037411a
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    source: 7718f9d0-edd1-435a-8228-02d32ad18638
+    target: 2cc81d95-9aa1-4b0a-b7d8-d51ecbcede78
+  - canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    id: 3b826d10-8541-4910-b906-4e845ba7de3b
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    source: 08ea2d2a-f80e-4c76-8a2d-b971bec142eb
+    target: a766942b-9f71-4f9f-8968-9235bb27d680
+  - canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    id: 48ffa26a-e81a-49a6-a44c-826f1baf399a
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    source: 4fc5ffa8-917f-4052-ab08-9929c22e751e
+    target: 2e155989-b47e-432c-b3fa-b41ba9a33151
+  - canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    id: 4f9e2418-55a1-423e-b790-29d66c2e9596
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    source: a766942b-9f71-4f9f-8968-9235bb27d680
+    target: 86397ee3-5833-4a17-8e13-61e201d990c5
+  - canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    id: 676b7bba-8de8-4d67-a387-c6638e9c0050
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    source: 2891665a-852b-438c-8cc6-b6db69e587c5
+    target: 7718f9d0-edd1-435a-8228-02d32ad18638
+  - canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    id: 6cc316b4-7e32-4a41-be2a-515b4c142f94
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    source: 4fc5ffa8-917f-4052-ab08-9929c22e751e
+    target: 903293de-61d5-4c6e-8068-30d2ec4d3206
+  - canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    id: 9ea83b42-53f2-48ff-98c1-8a856ab78080
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    source: 903293de-61d5-4c6e-8068-30d2ec4d3206
+    target: 08ea2d2a-f80e-4c76-8a2d-b971bec142eb
+  - canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    id: d592ae8d-0139-4fc1-9351-c4ccb0f9c44d
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    source: a766942b-9f71-4f9f-8968-9235bb27d680
+    target: 2891665a-852b-438c-8cc6-b6db69e587c5
+  - canvas_id: ef6d2253-de8a-4add-8786-e6c50a920910
+    id: ecc36856-b0d1-48e2-84dc-b9b0189e0a8d
+    layer_id: de6f95ce-be0b-4f98-b103-723a502bdd07
+    source: 4fc5ffa8-917f-4052-ab08-9929c22e751e
+    target: 49327f63-85f2-42f4-8cbe-7ae9c6db4a5a
+  id: de6f95ce-be0b-4f98-b103-723a502bdd07
+  name: NCAA Tournament Seed Prediction Pipeline
+  type: 1
+assets: []
